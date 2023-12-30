@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a project', completed: false },
+    { id: 3, text: 'Deploy the app', completed: false },
+  ]);
+
+  const toggleTodoCompletion = (id) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  return (
+    <div className="todo-list">
+      <h1>Todo List</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodoCompletion(todo.id)}
+            />
+            <span className={todo.completed ? 'completed' : ''}>{todo.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
